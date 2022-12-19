@@ -1,0 +1,37 @@
+{
+    "totalPage": 5,
+    "currentPage": 2,
+    "keyword": "찾을 키워드",
+    "totalCount": 1,
+    "bookInfoTable": [
+        {
+            "biSeq": 5,                         
+            "biTitle": "책 제목",                         
+            "biSubTitle": "책 부제목",                            
+            "biPrice": 25000,   
+            "biDiscount" : 0.3,                      
+            "biBenefit": 0.1,                           
+            "biAlarm": "알립니다",                         
+            "biPublicDt": "2022-12-16T00:00:00",                          
+            "biPublisher":"출판사명",
+            "biAuthor":"작가 번역가",
+            "biDiSeq":1,
+            "biIiSeq":1                      
+        }
+    ],
+    "imageInfoTable":[
+        {
+            "iiSeq":1,
+            "iiFileName":"image",
+            "iiUri":"image.jpg"
+        }
+    ],
+    "deliveryInfoTable":[
+        {
+            "diSeq":1,
+            "diMinPrice":10000,
+            "diPrice":2500,
+            "diDay":"2022-12-16T00:00:00"
+        }
+    ]
+}
