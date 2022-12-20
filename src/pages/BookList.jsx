@@ -1,5 +1,12 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+
 const BookList = (props) => {
+  const navigate = useNavigate();
+  const goBookMain = () => {
+    navigate('/bookmain', {replace:true});
+  }
+  
   // const imgSize = { width: 170, height: 270 };
   const list = props.bookList.map((item, index) => {
     return (
@@ -8,7 +15,7 @@ const BookList = (props) => {
           <div className="card h-100">
             <img src={item.photo} class="card-img-top" alt={item.title} />
             <div className="card-body">
-              <h5 className="card-title mt-2">
+              <h5 className="card-title mt-2" onClick={goBookMain}>
                 <b>{item.title}</b>
               </h5>
               <p className="fs-6">

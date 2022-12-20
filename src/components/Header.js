@@ -17,7 +17,7 @@ const Header = () => {
         className={({ isActive }) => {
           return isActive ? "btn menu btn-dark" : "btn menu btn-success";
         }}
-        to="/BookList"
+        to="/"
       >
         BookList 바로가기
       </NavLink>
