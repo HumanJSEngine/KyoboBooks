@@ -12,22 +12,24 @@ import './App.css';
 
 const App = () => {
   const [bookList, setBookList] = useState([]);
-
+  const [bookDetail, setBookDetail] = useState([]);
   const fetchData = async () => {
-    const resultBookList = await instance.get(requests.fetchBookList);
-    setBookList(resultBookList.data);
+    const resultBookList = await instance.get(requests.bookList);
+    setBookList(resultBookList.data.list);
+    const resultBookDetail = await instance.get(requests.bookDetail);
+    setBookDetail(resultBookDetail.data.list);
   };
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   return (
     <div className='container'>
       <Header />
       <Routes>
-        <Route index element={<BookList bookList={bookList} />} />
-        <Route path="/bookmain" element={<BookMain />} />
+        <Route path="/" element={<BookList bookList={bookDetail} />} />
+        <Route path="/bookmain/:id" element={<BookMain BookMain={bookList}/>} />
         <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

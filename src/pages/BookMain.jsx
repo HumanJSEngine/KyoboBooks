@@ -1,8 +1,10 @@
 /** @format */
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -67,23 +69,35 @@ const Right = styled.div`
 
 const BookMain = (props) => {
   const navigate = useNavigate();
-
   const goBack = () => {
     navigate('/');
   };
+  const params = useParams();
+  const data = parseInt(params.id);
+  const [book, setBook] = useState({});
+
+  useEffect(()=>{
+    props.BookMain.find((item) => {
+      if(item.biSeq===data){
+        setBook(item)
+      };
+    });
+  }, [])
+  
+
+
   return (
     <Wrapper>
       <Left>
-        <span className="bookTitle">제목</span>
-        <span className="bookSubtitle">부제</span>
+        <span className="bookTitle">{book.biTitle}</span>
+        <span className="bookSubtitle">{book.biSubTitle}</span>
         <article className="bookImage">
           <img className="bookPicture" src="/photos/G.jpg" alt="dd" />
         </article>
         <Info>
-          <span className="author">저자</span>
-          <span className="translate">번역</span>
-          <span className="publish">출판사</span>
-          <span className="release">출시일</span>
+          <span className="author">{book.biAuthor}</span>
+          <span className="publish">{book.biPublisher}</span>
+          <span className="release">{book.biPublicDt}</span>
         </Info>
       </Left>
       <Right>
@@ -98,7 +112,7 @@ const BookMain = (props) => {
             Right
           </button>
         </div>
-        <span className="saleprice">할인가격</span>
+        <span className="saleprice">가격 : {book.biPrice}원</span>
         <hr />
         <span className="saving">적립/혜택</span>
         <hr />
@@ -109,7 +123,11 @@ const BookMain = (props) => {
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <button type="button" class="btn btn-outline-success" onClick={goBack}>
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            onClick={goBack}
+          >
             책목록으로
           </button>
           <button type="button" class="btn btn-outline-success">
