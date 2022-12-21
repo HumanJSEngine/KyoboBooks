@@ -14,7 +14,6 @@ const App = () => {
   const [bookList, setBookList] = useState([]);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [count, setCount] = useState(1);
   const [postPerPage] = useState(8);
 
   const [indexOfLastPost, setindexOfLastPost] = useState(0);
@@ -33,6 +32,9 @@ const App = () => {
     setCurrentPosts(items.slice(indexOfFirstPost, indexOfLastPost));
   }, [currentPage, indexOfFirstPost, indexOfLastPost, items, postPerPage]);
 
+  const setPage = (e) => {
+    setCurrentPage(e);
+  };
   return (
     <div className="container">
       <Header />
