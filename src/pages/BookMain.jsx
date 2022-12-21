@@ -246,7 +246,6 @@ const Wrapper = styled.div`
   justify-content: space-between; */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
   background: snow;
   padding: 2rem;
 `;
