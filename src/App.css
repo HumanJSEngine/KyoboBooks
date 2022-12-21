@@ -1,9 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap");
-
+@font-face {
+  font-family: "RIDIBatang";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 * {
   padding: 0;
   box-sizing: border-box;
-  font-family: "Nanum+Myeongjo";
+  font-family: "RIDIBatang";
 }
 .container {
   text-align: center;
@@ -18,7 +23,7 @@
 .pagination {
   display: flex;
   justify-content: right;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 ul {
