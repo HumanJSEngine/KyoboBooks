@@ -1,8 +1,8 @@
 /** @format */
 
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -69,7 +69,7 @@ const BookMain = (props) => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate('/');
+    navigate("/");
   };
   return (
     <Wrapper>
@@ -109,7 +109,11 @@ const BookMain = (props) => {
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <button type="button" class="btn btn-outline-success" onClick={goBack}>
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            onClick={goBack}
+          >
             책목록으로
           </button>
           <button type="button" class="btn btn-outline-success">
