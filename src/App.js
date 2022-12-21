@@ -3,14 +3,14 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 // axios API
-import instance from './api/axios';
-import requests from './api/request';
-import Header from './components/Header';
-import BookList from './pages/BookList';
-import BookMain from './pages/BookMain';
-import Payment from './pages/Payment';
-import NotFound from './pages/NotFound';
-import './App.css';
+import instance from "./api/axios";
+import requests from "./api/request";
+import Header from "./components/Header";
+import BookList from "./pages/BookList";
+import BookMain from "./pages/BookMain";
+import Payment from "./pages/Payment";
+import NotFound from "./pages/NotFound";
+import "./App.css";
 
 const App = () => {
   const [bookList, setBookList] = useState([]);
@@ -38,6 +38,7 @@ const App = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Payment />
     </div>
   );
 };
