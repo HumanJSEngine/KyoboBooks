@@ -1,3 +1,5 @@
+/** @format */
+
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 // axios API
@@ -25,11 +27,14 @@ const App = () => {
   }, []);
 
   return (
-    <div className='container'>
+    <div className="container">
       <Header />
       <Routes>
         <Route path="/" element={<BookList bookList={bookDetail} />} />
-        <Route path="/bookmain/:id" element={<BookMain BookMain={bookList}/>} />
+        <Route
+          path="/bookmain/:id"
+          element={<BookMain BookMain={bookList} />}
+        />
         <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
