@@ -197,7 +197,7 @@ const BookMain = (props) => {
             aria-label="Large button group"
             style={margin}
           >
-            <button type="button" className="btn btn-outline-warning">
+            <button type="button" className="btn btn-warning">
               <img src="/photos/ico_gift.png" alt="선물" style={paymentImg} />
               <span style={paymentTxt}>선물하기</span>
             </button>
@@ -372,7 +372,7 @@ const Payment = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  padding: 20px 0 20px;
+  padding: 20px 120px;
   border-top: 1px solid #ccc;
 `;
 
@@ -404,6 +404,7 @@ const Price = styled.div`
 const Button = styled.div`
   position: relative;
   display: flex;
+  cursor: pointer;
 `;
 
 const SpinnerBox = styled.div`
