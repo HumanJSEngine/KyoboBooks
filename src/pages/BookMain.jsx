@@ -1,10 +1,9 @@
 /** @format */
 
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
-import { useParams } from "react-router";
-
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import styled from 'styled-components';
+import { useParams } from 'react-router';
 const margin = { margin: 5 };
 const paymentImg = { width: 18, height: 23, margin: 3, background: 0 };
 const paymentTxt = { background: 0 };
@@ -39,12 +38,10 @@ const BookMain = (props) => {
       <Wrapper>
         <Left>
           <span className="bookTitle">{book.biTitle}</span>
-          <span className="bookSubtitle">{book.biSubTitle}</span>
-          <span className="author">{book.biAuthor}</span>
-          <Info>
-            <span className="publish">{book.biPublisher}</span>
-            <span className="release">{book.biPublicDt}</span>
-          </Info>
+          <span className="subandauthor">
+            <span className="bookSubtitle">{book.biSubTitle}</span>
+            <span className="author">{book.biAuthor}</span>
+          </span>
           <article className="bookImage">
             <img
               className="bookPicture"
@@ -52,6 +49,10 @@ const BookMain = (props) => {
               alt="{book.biIiFileName}"
             />
           </article>
+          <Info>
+            <span className="publish">{book.biPublisher}</span>
+            <span className="release">{book.biPublicDt}</span>
+          </Info>
         </Left>
         <Right>
           <div
@@ -132,6 +133,30 @@ const BookMain = (props) => {
               보관함 +
             </button>
           </div>
+          <hr />
+          <Noticelist>
+            <div className="alarmlist">
+              <span className="alarminfo">
+                알림 신청하시면 원하시는 정보를
+                <br />
+                받아 보실 수 있습니다.
+              </span>
+              <button className="alarmbtn">
+                <img src="/photos/alarm.png" alt="" />
+                <span className="text">알림신청</span>
+              </button>
+            </div>
+            <div className="infotext">
+              <span className="infohead">
+                <img src="/photos/chat.png" alt="" /> 알립니다
+              </span>
+              <span className="bialarm">{book.biAlarm}</span>
+            </div>
+            <button className="marketplace">
+              <img src="/photos/marketplace.png" alt="" />
+              매장 재고 위치
+            </button>
+          </Noticelist>
         </Right>
         <BookInfo>
           <div className="bookpresent">
@@ -232,42 +257,44 @@ const BookMain = (props) => {
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
   /* display: flex;
   justify-content: space-between; */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  background: snow;
-  padding: 2rem;
+  padding: 2.5rem;
 `;
 
 const Left = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 1rem 0;
+  height: 100%;
+  gap: 2rem 0;
+
   > .bookTitle {
     width: 100%;
     height: 30px;
     border-radius: 20px;
     font-size: 2rem;
     font-weight: 600;
+    white-space: nowrap;
   }
   > .bookSubtitle {
     width: 100%;
     height: 30px;
-    margin-top: 2rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
   }
-  > .author {
-    font-size: 1.5rem;
-    font-weight: 500;
+  > .subandauthor {
+    display: flex;
+    justify-content: center;
+    span {
+      font-size: 20px;
+    }
   }
   > .bookImage {
     > .bookPicture {
-      width: 550px;
+      width: 500px;
       height: 600px;
       object-fit: contain;
     }
@@ -275,12 +302,14 @@ const Left = styled.div`
 `;
 
 const Info = styled.span`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  padding-left: 90px;
   > span {
-    font-size: 1.5rem;
+    font-size: 20px;
     font-weight: 500;
+  }
+  > .release {
+    margin-left: 1rem;
   }
 `;
 
@@ -352,15 +381,23 @@ const PriceList = styled.div`
 `;
 
 const BookInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rem;
+  border-top: 1px solid gray;
   grid-column: 1/3;
   grid-row: 2/3;
   text-align: left;
   font-size: 1.5rem;
-  padding-top: 2rem;
+  padding: 30px 80px;
   .bookpresent {
+    margin: 5rem 0;
     display: flex;
+    gap: 5rem 0;
     flex-direction: column;
-    gap: 1rem 0;
+  }
+  .bookintro {
+    margin-top: 5rem;
   }
 `;
 
@@ -478,4 +515,51 @@ const Center = styled.div`
   }
 `;
 
+const Noticelist = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem 0;
+  .alarmlist {
+    display: flex;
+    justify-content: space-between;
+    .alarminfo {
+      text-align: left;
+    }
+  }
+  .alarmbtn {
+  border: 3px solid #474c98;
+  width: 120px;
+  border-radius: 10px;
+  color: #474c98;
+  font-size: 20px;
+  background: none;
+}
+.infotext {
+  width: 100%;
+  height: 120px;
+  background-color: rgb(252, 248, 248);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 2rem;
+  gap: 10px;
+  .infohead {
+  color: #474c98 !important;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.bialarm {
+  color: #474c98 !important;
+  font-size: 1.2rem;
+}
+}
+.marketplace {
+  border: 3px solid rgb(220, 214, 214);
+  background: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+`;
 export default BookMain;
