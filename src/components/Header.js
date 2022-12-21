@@ -6,8 +6,8 @@ const imgSize = { width: 40, height: 40, border: 0, margin: 15 };
 
 const Right = styled.div`
   position: absolute;
-  right: 320px;
-  top: 55px;
+  right: 291px;
+  top: 170px;
   > .img-cart {
     cursor: pointer;
   }
@@ -18,13 +18,13 @@ const Right = styled.div`
 
 const Nav = styled.div`
   position: absolute;
-  right: 334px;
-  top: 130px;
+  right: 305px;
+  top: 137px;
 `;
 
 const Header = () => {
   return (
-    <div className="flex text-center">
+    <div className="flex text-center mt-5">
       <div className="navbar-brand">
         <img
           src="/photos/img_logo_kyobo.png"
@@ -54,7 +54,7 @@ const Header = () => {
           }}
           to="/"
         >
-          책목록으로
+          To BookList
         </NavLink>
       </Nav>
     </div>

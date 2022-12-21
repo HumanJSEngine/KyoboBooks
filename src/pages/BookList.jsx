@@ -11,6 +11,10 @@ const BookList = (props) => {
   const [page, setPage] = useState(1);
   const [items, setItems] = useState(8);
 
+  const cal = (a) => {
+    return a * 0.9;
+  };
+
   const fetchData = async () => {
     const resultData = await instance.get(requests.bookList);
     setData(resultData.data.list);
@@ -34,13 +38,15 @@ const BookList = (props) => {
 
   return (
     <div>
-      <h1 className="mt-4">Boooklsit</h1>
-      <Mg className="mb-2">
+      <h1 className="mt-4 border border-success border-start-0 border-end-0 p-3">Boooklsit</h1>
+      <Mg className="mb-2 mt-5">
         {getClick}
         <select name="items" onChange={itemChange}>
           <option value="4">4개씩 보기</option>
-          <option value="8">8개씩 보기</option>
-          <option value="12">12개 보기</option>
+          <option value="8" selected>
+            8개씩 보기
+          </option>
+          <option value="12">12개씩 보기</option>
         </select>
       </Mg>
 
@@ -52,7 +58,7 @@ const BookList = (props) => {
         onChange={handlePageChange}
       ></Pagination>
 
-      <div className="row row-cols-4 mt-4container ">
+      <div className="row row-cols-4 container ">
         {data
           .slice(items * (page - 1), items * (page - 1) + items)
           .map((item, i) => {
@@ -62,23 +68,28 @@ const BookList = (props) => {
                 key={item.biSeq}
                 style={{ textDecoration: "inherit", color: "inherit" }}
               >
-                <div className="col txt-left mb-5">
-                  <div className="card h-100">
-                    <img
-                      src={`http://192.168.0.111:9988/api/image/${item.biIiUri}`}
-                      className="card-img-top"
-                      alt={item.biTitle}
-                      // style={{width: 100, height: 100}}
-                    />
+                <div className="col txt-left mb-5 ">
+                  <div className="card ">
+                    <div className="embed-responsive embed-responsive-4by3 ">
+                      <img
+                        src={`http://192.168.0.111:9988/api/image/${item.biIiUri}`}
+                        className="card-img-top embed-responsive-item"
+                        alt={item.biTitle}
+                        style={{ height: 400 }}
+                      />
+                    </div>
                     <div className="card-body bg-wh">
-                      <div className="card-title mt-2">
+                      <div className="card-title fs-5 mt-2">
                         <b className="bg-wh">{item.biTitle}</b>
                       </div>
-                      <p className="fs-6 bg-wh">{item.biAuthor}</p>
-                      <p className="fs-6 bg-wh">{item.biPublisher}</p>
+                      <p className="fs-7 bg-wh">
+                        {item.biAuthor}
+                        <br />
+                        {item.biPublisher}
+                      </p>
                       <p className="fs-5 bg-wh">
                         <span className="badge text-bg-success m-2">10%</span>
-                        {item.biPrice}원
+                        {cal(item.biPrice)?.toLocaleString()}원
                       </p>
                     </div>
                   </div>
@@ -104,4 +115,5 @@ const Mg = styled.div`
   justify-content: right;
   margin-bottom: 60px;
 `;
+
 export default BookList;
