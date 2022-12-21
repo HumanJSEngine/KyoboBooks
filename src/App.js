@@ -8,7 +8,6 @@ import requests from "./api/request";
 import Header from "./components/Header";
 import BookList from "./pages/BookList";
 import BookMain from "./pages/BookMain";
-import Payment from "./pages/Payment";
 import NotFound from "./pages/NotFound";
 import "./App.css";
 
@@ -35,10 +34,8 @@ const App = () => {
           path="/bookmain/:id"
           element={<BookMain BookMain={bookList} />}
         />
-        <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Payment />
     </div>
   );
 };
