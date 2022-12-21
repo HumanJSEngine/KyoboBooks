@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Paging from "./Paging";
 
@@ -11,25 +11,25 @@ const BookList = (props) => {
 
   const list = props.bookList.map((item, index) => {
     return (
-      <div key={index}>
+      <Link to={`/bookMain/${item.biSeq}`} key={item.biSeq}>
         <div className="col txt-left mb-5">
           <div className="card h-100">
-            <img src={item.photo} class="card-img-top" alt={item.title} />
+            <img src={item.photo} className="card-img-top" alt={item.biTitle} />
             <div className="card-body bg-wh">
-              <h5 className="card-title mt-2" onClick={goBookMain}>
-                <b className="bg-wh">{item.title}</b>
-              </h5>
+              <div className="card-title mt-2">
+                <b className="bg-wh">{item.biTitle}</b>
+             </div>
               <p className="fs-6 bg-wh">
-                {item.niName} · {item.piName}
+                {item.biSubTitle} · {item.biAuthor}
               </p>
               <p className="fs-5 bg-wh">
-                <span class="badge text-bg-success m-2">10%</span>
+                <span className="badge text-bg-success m-2">10%</span>
                 {item.biPrice}원
               </p>
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   });
 

@@ -1,7 +1,6 @@
 const requests = {
-  // fetchList: "/book.json",
-  fetchList: "/minipj.json",
-  fetchBookList: "/book11.json"
+  bookList: "/listall/book",
+  bookDetail: "/list/book"
 };
 
 export default requests;
