@@ -23,6 +23,7 @@ const App = () => {
   const [indexOfFirstPost, setindexOfFirstPost] = useState(0);
   const [currentPost, setcurrentPost] = useState(0);
   const [bookDetail, setBookDetail] = useState([]);
+  
   const fetchData = async () => {
     const resultBookList = await instance.get(requests.bookList);
     setBookList(resultBookList.data.list);

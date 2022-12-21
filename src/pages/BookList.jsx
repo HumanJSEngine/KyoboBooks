@@ -4,11 +4,6 @@ import styled from "styled-components";
 import Paging from "./Paging";
 
 const BookList = (props) => {
-  const navigate = useNavigate();
-  const goBookMain = () => {
-    navigate("/bookmain", { replace: true });
-  };
-
   const list = props.bookList.map((item, index) => {
     return (
       <Link to={`/bookMain/${item.biSeq}`} key={item.biSeq}>
@@ -18,7 +13,7 @@ const BookList = (props) => {
             <div className="card-body bg-wh">
               <div className="card-title mt-2">
                 <b className="bg-wh">{item.biTitle}</b>
-             </div>
+              </div>
               <p className="fs-6 bg-wh">
                 {item.biSubTitle} · {item.biAuthor}
               </p>
