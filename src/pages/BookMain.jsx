@@ -10,6 +10,7 @@ const paymentImg = { width: 18, height: 23, margin: 3, background: 0 };
 const paymentTxt = { background: 0 };
 
 const BookMain = (props) => {
+  const [x, setX] = useState(1);
   const params = useParams();
   const data = parseInt(params.id);
   const [book, setBook] = useState([]);
@@ -22,6 +23,12 @@ const BookMain = (props) => {
     });
   }, [data, props.BookMain]);
 
+  const handlePlus = () => setX(x + 1);
+  const handleMinus = () => {
+    if (x === 1) return;
+    setX(x - 1);
+  };
+  
   const cal = (a) => {
     return a * 0.9;
   };
@@ -151,25 +158,27 @@ const BookMain = (props) => {
         <Title>
           <span className="main">총 상품 금액</span>
           <Price>
-            <span className="val">{cal(book.biPrice)?.toLocaleString()}</span>
+            <span className="val">
+              {cal(book.biPrice * x)?.toLocaleString()}
+            </span>
             <span className="unit"> 원 </span>
           </Price>
         </Title>
         <Button>
           <SpinnerBox>
             <Center>
-              <button className="decrease">
+              <button onClick={handleMinus} className="decrease">
                 <span className="dec-icon">
                   <img src="/photos/ico_down.png" alt="감소" />
                 </span>
               </button>
               <input
-                value="1"
+                value={x}
                 className="spinner-input"
                 title="수량"
                 autocomplete="off"
               />
-              <button className="increase">
+              <button onClick={handlePlus} className="increase">
                 <span className="inc-icon">
                   <img src="/photos/ico_up.png" alt="증가" />
                 </span>
@@ -197,7 +206,7 @@ const BookMain = (props) => {
             aria-label="Large button group"
             style={margin}
           >
-            <button type="button" className="btn btn-outline-warning">
+            <button type="button" className="btn btn-warning">
               <img src="/photos/ico_gift.png" alt="선물" style={paymentImg} />
               <span style={paymentTxt}>선물하기</span>
             </button>
@@ -372,7 +381,7 @@ const Payment = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  padding: 20px 0 20px;
+  padding: 20px 120px;
   border-top: 1px solid #ccc;
 `;
 
@@ -404,6 +413,7 @@ const Price = styled.div`
 const Button = styled.div`
   position: relative;
   display: flex;
+  cursor: pointer;
 `;
 
 const SpinnerBox = styled.div`
