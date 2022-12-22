@@ -61,7 +61,7 @@ const BookList = (props) => {
     <div>
       <div className="mt-4 border border-success border-start-0 border-end-0 p-3 position-relative">
         <h1>BookList</h1>
-        
+        <Form>
           <form onSubmit={(e) => onSearch(e)}>
             <input
               type="text"
@@ -74,7 +74,7 @@ const BookList = (props) => {
               Search
             </button>
           </form>
-        
+        </Form>
       </div>
 
       <Mg className="mb-2 mt-5">
@@ -159,7 +159,7 @@ const Mg = styled.div`
   margin-bottom: 60px;
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   display: block;
   position: absolute;
   top: 50%;
