@@ -10,6 +10,8 @@ const BookList = (props) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [items, setItems] = useState(8);
+  const [search, setSearch] = useState('');
+  
 
   const cal = (a) => {
     return a * 0.9;
@@ -36,9 +38,31 @@ const BookList = (props) => {
     return () => {};
   }, []);
 
+  const onSearch = (e) => {
+    e.preventDefault();
+    if (search === null || search === ''){
+      alert('검색어를 입력하세요');
+    }else{
+      const filterData = data.filter((row) => row.biTitle.includes(search))
+      setData(filterData);
+      setPage(1);
+    };
+    setSearch('')
+  }
+
+  const onChangeSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
   return (
     <div>
       <h1 className="mt-4 border border-success border-start-0 border-end-0 p-3">Boooklsit</h1>
+      <form onSubmit={e => onSearch(e)}>
+        <input type="text" value={search} placeholder='제목을 입력하세요' onChange={onChangeSearch}/>
+        <button type='submit'>검색</button>
+      </form>
+
       <Mg className="mb-2 mt-5">
         {getClick}
         <select name="items" onChange={itemChange}>
@@ -57,6 +81,7 @@ const BookList = (props) => {
         pageRangeDisplayed={8}
         onChange={handlePageChange}
       ></Pagination>
+     
 
       <div className="row row-cols-4 container ">
         {data
@@ -98,14 +123,6 @@ const BookList = (props) => {
             );
           })}
       </div>
-
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={items}
-        totalItemsCount={data.length - 1}
-        pageRangeDisplayed={8}
-        onChange={handlePageChange}
-      ></Pagination>
     </div>
   );
 };

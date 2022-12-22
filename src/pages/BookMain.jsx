@@ -1,9 +1,9 @@
 /** @format */
 
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router';
+import Lottie from 'lottie-web';
 const margin = { margin: 5 };
 const paymentImg = { width: 18, height: 23, margin: 3, background: 0 };
 const paymentTxt = { background: 0 };
@@ -13,6 +13,42 @@ const BookMain = (props) => {
   const params = useParams();
   const data = parseInt(params.id);
   const [book, setBook] = useState([]);
+  const clock = useRef(null);
+  const bell = useRef(null);
+  const bookmark = useRef(null);
+  const [hour, setHour] = useState(23 - new Date().getHours());
+  const [minute, setMinute] = useState(59 - new Date().getMinutes());
+  const [second, setSecond] = useState(59 - new Date().getSeconds());
+
+  useEffect(() => {
+    Lottie.loadAnimation({
+      container: clock.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: require('../assets/clock.json'),
+    });
+  }, []);
+
+  useEffect(() => {
+    Lottie.loadAnimation({
+      container: bell.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: require('../assets/bell.json'),
+    });
+  }, []);
+
+  useEffect(() => {
+    Lottie.loadAnimation({
+      container: bookmark.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: require('../assets/bookmark.json'),
+    });
+  }, []);
 
   useEffect(() => {
     props.BookMain.find((item) => {
@@ -22,12 +58,21 @@ const BookMain = (props) => {
     });
   }, [data, props.BookMain]);
 
+  useEffect(() => {
+    const id = setInterval(() => {
+      setHour(23 - new Date().getHours());
+      setMinute(59 - new Date().getMinutes());
+      setSecond(59 - new Date().getSeconds());
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   const handlePlus = () => setX(x + 1);
   const handleMinus = () => {
     if (x === 1) return;
     setX(x - 1);
   };
-  
+
   const cal = (a) => {
     return a * 0.9;
   };
@@ -99,12 +144,14 @@ const BookMain = (props) => {
             </button>
           </div>
           <PriceList>
-            <span className="sale">10%</span>
-            <span className="price">
+            <span class="salerate">
+              {book.biDiscount * 100}% <span>{book.biPrice}원</span>
+            </span>
+            <span className="saleprice">
               {cal(book.biPrice)?.toLocaleString()}원
             </span>
-            <span className="saledprice">
-              {book.biPrice?.toLocaleString()}원
+            <span className="saleprice2">
+              {(book.biPrice * 0.1)?.toLocaleString()}원
             </span>
           </PriceList>
           <hr />
@@ -115,11 +162,21 @@ const BookMain = (props) => {
             </span>
           </div>
           <hr />
-          <div className="delivery">
-            <span className="delivery1">배송안내</span>
-            <span className="delivery2">
-              내일 {Month}월/{date}일, 도착예정
-            </span>
+          <div className="deliveryset">
+            <div className="delivery">
+              <span className="delivery1">무료배송</span>
+              <span className="delivery2">
+                <span>
+                  내일 {Month}월/{date}일, 도착보장
+                </span>
+              </span>
+              <span className="remaintime">
+                ({hour < 10 ? '0' + hour : hour}:
+                {minute < 10 ? '0' + minute : minute}:
+                {second < 10 ? '0' + second : second}내 주문시 / 수도권 기준)
+              </span>
+            </div>
+            <div className="clock" ref={clock}></div>
           </div>
           <hr />
           <div
@@ -133,10 +190,10 @@ const BookMain = (props) => {
             <button type="button" className="btn btn-danger">
               바로구매
             </button>
-            <button type="button" className="btn btn-outline-danger">
+            <button type="button" className="btn btn-outline-secondary">
               선물하기
             </button>
-            <button type="button" className="btn btn-outline-danger">
+            <button type="button" className="btn btn-outline-secondary">
               보관함 +
             </button>
           </div>
@@ -149,15 +206,15 @@ const BookMain = (props) => {
                 받아 보실 수 있습니다.
               </span>
               <button className="alarmbtn">
-                <img src="/photos/alarm.png" alt="" />
+                <div className="bell" ref={bell}></div>
                 <span className="text">알림신청</span>
               </button>
             </div>
             <div className="infotext">
-              <span className="infohead">
-                <img src="/photos/chat.png" alt="" /> 알립니다
+              <div className="bookmark" ref={bookmark}></div>
+              <span className="bialarm">
+                {book.biAlarm ? book.biAlarm : 'DB가 없읍니다'}
               </span>
-              <span className="bialarm">{book.biAlarm}</span>
             </div>
             <button className="marketplace">
               <img src="/photos/marketplace.png" alt="" />
@@ -169,13 +226,13 @@ const BookMain = (props) => {
           <div className="bookpresent">
             <h2>책 소개</h2>
             <span className="bookpresent1">이 책이 속한 분야</span>
-            <span className="bookpresent2">
-              국내도서 > 청소년 > 청소년 소설
-            </span>
-            <span className="bookpresent3">국내도서 > 소설 > 영미 소설</span>
+            <span className="bookpresent2">국내도서 청소년 청소년 소설</span>
+            <span className="bookpresent3">국내도서 소설 영미 소설</span>
           </div>
           <hr />
-          <span className="bookintro">{book.biContent}</span>
+          <span className="bookintro">
+            {book.biContent ? book.biContent : 'DB가 없읍니다'}
+          </span>
         </BookInfo>
       </Wrapper>
 
@@ -303,8 +360,8 @@ const Left = styled.div`
   }
   > .bookImage {
     > .bookPicture {
-      width: 500px;
-      height: 600px;
+      width: 700px;
+      height: 900px;
       object-fit: contain;
     }
   }
@@ -349,14 +406,37 @@ const Right = styled.div`
       color: green;
     }
   }
-  .delivery {
+
+  .deliveryset {
     display: flex;
     justify-content: space-between;
-    span {
-      font-weight: 550;
-      font-size: 1.5rem;
+    .delivery {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      .delivery1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .delivery2 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: green;
+        display: flex;
+      }
+      .remaintime {
+        color: black;
+        font-size: 1.5rem;
+      }
+    }
+    .clock {
+      svg {
+        width: 120px !important;
+        height:120px !important;
+      }
     }
   }
+
   .btn-group2 {
     display: flex;
     gap: 0 1rem;
@@ -370,22 +450,26 @@ const Right = styled.div`
 
 const PriceList = styled.div`
   display: flex;
-  gap: 0 1rem;
-
-  .sale {
-    color: green;
-    font-weight: 600;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: left;
+  letter-spacing: 2px;
+  .salerate {
     font-size: 2rem;
+    > span {
+      font-size: 2rem;
+      text-decoration: line-through;
+      color: gray;
+    }
   }
-  .price {
+  .saleprice {
     font-size: 2rem;
     font-weight: 600;
   }
-  .saledprice {
-    font-size: 1.5rem;
-    text-align: end;
-    text-decoration: line-through;
-    padding-top: 0.5rem;
+  .saleprice2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: red;
   }
 `;
 
@@ -537,39 +621,53 @@ const Noticelist = styled.div`
     }
   }
   .alarmbtn {
-  border: 3px solid #474c98;
-  width: 120px;
-  border-radius: 10px;
-  color: #474c98;
-  font-size: 20px;
-  background: none;
-}
-.infotext {
-  width: 100%;
-  height: 120px;
-  background-color: rgb(252, 248, 248);
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  padding: 2rem;
-  gap: 10px;
-  .infohead {
-  color: #474c98 !important;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-.bialarm {
-  color: #474c98 !important;
-  font-size: 1.2rem;
-}
-}
-.marketplace {
-  border: 3px solid rgb(220, 214, 214);
-  background: none;
-  border-radius: 10px;
-  padding: 10px;
-}
-
+    border: 3px solid #474c98;
+    border-radius: 10px;
+    color: #474c98;
+    background: none;
+    display: flex;
+    padding: 5px;
+    > .bell {
+      svg {
+        width: 40px !important;
+        height: 40px !important;
+      }
+    }
+    > .text {
+      font-size: 1rem;
+      padding-top: 8px;
+    }
+  }
+  .infotext {
+    width: 100%;
+    height: 120px;
+    background-color: rgb(252, 248, 248);
+    border-radius: 20px;
+    display: flex;
+    padding: 1.5rem;
+    .bookmark {
+      svg {
+        width: 80px !important;
+        height: 80px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+    }
+    .bialarm {
+      color: #474c98;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .marketplace {
+    border: 3px solid rgb(220, 214, 214);
+    background: none;
+    border-radius: 10px;
+    padding: 10px;
+  }
 `;
 export default BookMain;
