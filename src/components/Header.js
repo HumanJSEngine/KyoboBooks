@@ -23,12 +23,6 @@ const Header = () => {
           alt="cart"
           style={imgSize}
         />
-        <img
-          src="/photos/btn_header_my.png"
-          className="img-my"
-          alt="my"
-          style={imgSize}
-        />
         <Link to="/Member">
           <img
             src="/photos/btn_header_my.png"
