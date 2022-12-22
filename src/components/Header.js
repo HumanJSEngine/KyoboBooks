@@ -4,24 +4,6 @@ import { Link, NavLink } from "react-router-dom";
 const logoSize = { width: 330, height: 180, border: 0 };
 const imgSize = { width: 40, height: 40, border: 0, margin: 15 };
 
-const Right = styled.div`
-  position: absolute;
-  right: 291px;
-  top: 170px;
-  > .img-cart {
-    cursor: pointer;
-  }
-  > .img-my {
-    cursor: pointer;
-  }
-`;
-
-const Nav = styled.div`
-  position: absolute;
-  right: 305px;
-  top: 137px;
-`;
-
 const Header = () => {
   return (
     <div className="flex text-center mt-5">
@@ -38,6 +20,12 @@ const Header = () => {
           src="/photos/btn_header_cart.png"
           className="img-cart"
           alt="cart"
+          style={imgSize}
+        />
+        <img
+          src="/photos/btn_header_my.png"
+          className="img-my"
+          alt="my"
           style={imgSize}
         />
         <Link to="/Member">
@@ -62,4 +50,23 @@ const Header = () => {
     </div>
   );
 };
+
+const Right = styled.div`
+  position: absolute;
+  right: 291px;
+  top: 170px;
+  > .img-cart {
+    cursor: pointer;
+  }
+  > .img-my {
+    cursor: pointer;
+  }
+`;
+
+const Nav = styled.div`
+  position: absolute;
+  right: 305px;
+  top: 137px;
+`;
+
 export default Header;

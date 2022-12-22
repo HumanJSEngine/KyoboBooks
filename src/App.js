@@ -8,6 +8,7 @@ import requests from "./api/request";
 import Header from "./components/Header";
 import BookList from "./pages/BookList";
 import BookMain from "./pages/BookMain";
+import LogIn from "./pages/LogIn";
 import Member from "./pages/Member";
 import NotFound from "./pages/NotFound";
 import "./App.css";
@@ -36,6 +37,7 @@ const App = () => {
           path="/bookmain/:id"
           element={<BookMain BookMain={bookList} />}
         />
+        <Route path="/login" element={<LogIn />} />
         <Route path="/member" element={<Member />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -1,9 +1,11 @@
 /** @format */
 
+import { useParams } from "react-router";
+import { NavLink } from "react-router-dom";
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router';
 import Lottie from 'lottie-web';
+
 const margin = { margin: 5 };
 const paymentImg = { width: 18, height: 23, margin: 3, background: 0 };
 const paymentTxt = { background: 0 };
@@ -236,88 +238,101 @@ const BookMain = (props) => {
           </span>
         </BookInfo>
       </Wrapper>
-
-      <Payment>
-        <Title>
-          <span className="main">총 상품 금액</span>
-          <Price>
-            <span className="val">
-              {cal(book.biPrice * x)?.toLocaleString()}
-            </span>
-            <span className="unit"> 원 </span>
-          </Price>
-        </Title>
-        <Button>
-          <SpinnerBox>
-            <Center>
-              <button onClick={handleMinus} className="decrease">
-                <span className="dec-icon">
-                  <img src="/photos/ico_down.png" alt="감소" />
-                </span>
-              </button>
-              <input
-                value={x}
-                className="spinner-input"
-                title="수량"
-                autocomplete="off"
-              />
-              <button onClick={handlePlus} className="increase">
-                <span className="inc-icon">
-                  <img src="/photos/ico_up.png" alt="증가" />
-                </span>
-              </button>
-            </Center>
-          </SpinnerBox>
-          <div
-            className="btn-group btn-group-lg"
-            role="group"
-            aria-label="Large button group"
-            style={margin}
-          >
-            <button
-              type="button"
-              className="btn btn-outline-secondary"
-              disabled
+      <Wrapper2>
+        <Payment>
+          <Title>
+            <span className="main">총 상품 금액</span>
+            <Price>
+              <span className="val">
+                {cal(book.biPrice * x)?.toLocaleString()}
+              </span>
+              <span className="unit"> 원 </span>
+            </Price>
+          </Title>
+          <Button>
+            <CountBoxWrap>
+              <CountBox>
+                <button onClick={handleMinus} className="dec-btn">
+                  <span className="dec-icon">
+                    <img src="/photos/ico_down.png" alt="감량" />
+                  </span>
+                </button>
+                <input
+                  value={x}
+                  className="conut-input"
+                  title="수량"
+                  autocomplete="off"
+                />
+                <button onClick={handlePlus} className="inc-btn">
+                  <span className="inc-icon">
+                    <img src="/photos/ico_up.png" alt="증량" />
+                  </span>
+                </button>
+              </CountBox>
+            </CountBoxWrap>
+            <NavLink to="/login">
+              <div
+                className="btn-group btn-group-lg"
+                role="group"
+                aria-label="Large button group"
+                style={margin}
+              >
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  disabled
+                >
+                  <img
+                    src="/photos/ico_heart.png"
+                    alt="하트"
+                    style={paymentImg}
+                  />
+                  <span style={paymentTxt}></span>
+                </button>
+              </div>
+            </NavLink>
+            <NavLink to="/login" style={{ textDecoration: "none" }}>
+            <div
+              className="btn-group btn-group-lg"
+              role="group"
+              aria-label="Large button group"
+              style={margin}
             >
-              <img src="/photos/ico_heart.png" alt="하트" style={paymentImg} />
-              <span style={paymentTxt}></span>
-            </button>
-          </div>
-          <div
-            className="btn-group btn-group-lg"
-            role="group"
-            aria-label="Large button group"
-            style={margin}
-          >
-            <button type="button" className="btn btn-warning">
-              <img src="/photos/ico_gift.png" alt="선물" style={paymentImg} />
-              <span style={paymentTxt}>선물하기</span>
-            </button>
-          </div>
-          <div
-            className="btn-group btn-group-lg"
-            role="group"
-            aria-label="Large button group"
-            style={margin}
-          >
-            <button type="button" className="btn btn-secondary">
-              장바구니
-            </button>
-          </div>
-          <div
-            className="btn-group btn-group-lg"
-            role="group"
-            aria-label="Large button group"
-          >
-            <button type="button" className="btn btn-outline-danger">
-              바로드림
-            </button>
-            <button type="button" className="btn btn-outline-danger">
-              바로구매
-            </button>
-          </div>
-        </Button>
-      </Payment>
+              <button type="button" className="btn btn-warning">
+                <img src="/photos/ico_gift.png" alt="선물" style={paymentImg} />
+                <span style={paymentTxt}>선물하기</span>
+              </button>
+            </div>
+            </NavLink>
+            <NavLink to="/login" style={{ textDecoration: "none" }}>
+            <div
+              className="btn-group btn-group-lg"
+              role="group"
+              aria-label="Large button group"
+              style={margin}
+            >
+              <button type="button" className="btn btn-secondary">
+                장바구니
+              </button>
+            </div>
+            </NavLink>
+            <NavLink to="/login" style={{ textDecoration: "none" }}>
+            <div
+              className="btn-group btn-group-lg"
+              role="group"
+              aria-label="Large button group"
+            >
+              <button type="button" className="btn btn-outline-danger">
+                바로드림
+              </button>
+              <button type="button" className="btn btn-outline-danger">
+                바로구매
+              </button>
+            </div>
+            </NavLink>
+          </Button>
+        </Payment>
+      </Wrapper2>
     </div>
   );
 };
@@ -487,6 +502,11 @@ const BookInfo = styled.div`
   }
 `;
 
+const Wrapper2 = styled.div`
+  margin-top: 150px;
+  
+`;
+
 const Payment = styled.div`
   position: fixed;
   left: 0;
@@ -503,6 +523,7 @@ const Title = styled.div`
   display: flex;
   width: 250px;
   line-height: 60px;
+  align-items: center;
   > .main {
     margin-right: 30px;
     font-size: 18px;
@@ -528,14 +549,15 @@ const Button = styled.div`
   position: relative;
   display: flex;
   cursor: pointer;
+  align-items: center;
 `;
 
-const SpinnerBox = styled.div`
+const CountBoxWrap = styled.div`
   display: block;
   margin-right: 25px;
 `;
 
-const Center = styled.div`
+const CountBox = styled.div`
   position: relative;
   display: flex;
   width: 100%;
@@ -544,7 +566,7 @@ const Center = styled.div`
   font-size: 0;
   vertical-align: middle;
   margin: 10px 0;
-  > .decrease {
+  > .dec-btn {
     display: block;
     width: 34px;
     height: 44px;
@@ -564,7 +586,7 @@ const Center = styled.div`
       }
     }
   }
-  > .spinner-input {
+  > .conut-input {
     width: 36px;
     height: 44px;
     margin: 0;
@@ -580,7 +602,7 @@ const Center = styled.div`
     text-align: center;
     box-sizing: border-box;
   }
-  > .increase {
+  > .inc-btn {
     display: block;
     width: 34px;
     height: 44px;
@@ -663,4 +685,5 @@ const Noticelist = styled.div`
     padding: 10px;
   }
 `;
+
 export default BookMain;
