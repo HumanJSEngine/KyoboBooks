@@ -126,7 +126,7 @@ const LogIn = () => {
             <img
               src="/photos/btn_more_view.png"
               alt="화살표"
-              style={{ width: 5, height: 9, marginLeft: 4 }}
+              style={{ width: 5, height: 9, marginLeft: 4, cursor: "pointer" }}
             />
           </span>
         </Guest>
@@ -285,10 +285,17 @@ const Guest = styled.div`
     color: #595959;
     font-size: 13px;
     font-weight: 500;
+    cursor: pointer;
   }
 `;
 const Banner = styled.div`
   margin-top: 20px;
+  cursor: pointer;
+  > .guest-txt {
+    color: #595959;
+    font-size: 13px;
+    font-weight: 500;
+  }
 `;
 
 export default LogIn;
