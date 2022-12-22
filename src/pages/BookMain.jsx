@@ -1,10 +1,11 @@
 /** @format */
 
-import React, { useEffect } from "react";
-import { useState } from "react";
-import styled from "styled-components";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
+import React, { useEffect, useState, useRef } from 'react';
+import styled from 'styled-components';
+import Lottie from 'lottie-web';
+
 const margin = { margin: 5 };
 const paymentImg = { width: 18, height: 23, margin: 3, background: 0 };
 const paymentTxt = { background: 0 };
@@ -14,6 +15,42 @@ const BookMain = (props) => {
   const params = useParams();
   const data = parseInt(params.id);
   const [book, setBook] = useState([]);
+  const clock = useRef(null);
+  const bell = useRef(null);
+  const bookmark = useRef(null);
+  const [hour, setHour] = useState(23 - new Date().getHours());
+  const [minute, setMinute] = useState(59 - new Date().getMinutes());
+  const [second, setSecond] = useState(59 - new Date().getSeconds());
+
+  useEffect(() => {
+    Lottie.loadAnimation({
+      container: clock.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: require('../assets/clock.json'),
+    });
+  }, []);
+
+  useEffect(() => {
+    Lottie.loadAnimation({
+      container: bell.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: require('../assets/bell.json'),
+    });
+  }, []);
+
+  useEffect(() => {
+    Lottie.loadAnimation({
+      container: bookmark.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: require('../assets/bookmark.json'),
+    });
+  }, []);
 
   useEffect(() => {
     props.BookMain.find((item) => {
@@ -22,6 +59,15 @@ const BookMain = (props) => {
       }
     });
   }, [data, props.BookMain]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setHour(23 - new Date().getHours());
+      setMinute(59 - new Date().getMinutes());
+      setSecond(59 - new Date().getSeconds());
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   const handlePlus = () => setX(x + 1);
   const handleMinus = () => {
@@ -47,7 +93,7 @@ const BookMain = (props) => {
         <Left>
           <span className="bookTitle">{book.biTitle}</span>
           <span className="subandauthor">
-            <span className="bookSubtitle">{book.biSubTitle}</span>
+            <span className="bookSubtitle">{book.biSubTitle}</span>&nbsp;&nbsp;
             <span className="author">{book.biAuthor}</span>
           </span>
           <article className="bookImage">
@@ -64,7 +110,7 @@ const BookMain = (props) => {
         </Left>
         <Right>
           <div
-            className="btn-group"
+            className="btn-group mainbuttons"
             role="group"
             aria-label="Basic outlined example"
           >
@@ -100,27 +146,40 @@ const BookMain = (props) => {
             </button>
           </div>
           <PriceList>
-            <span className="sale">10%</span>
-            <span className="price">
-              {cal(book.biPrice)?.toLocaleString()}원
+            <span class="salerate">
+              {book.biDiscount * 100}%{' '}
+              <span>{book.biPrice?.toLocaleString()}원</span>
             </span>
-            <span className="saledprice">
-              {book.biPrice?.toLocaleString()}원
+            <span className="saleprice">
+              정가 {cal(book.biPrice)?.toLocaleString()}원
+            </span>
+            <span className="saleprice2">
+              할인특가 {(book.biPrice * 0.1)?.toLocaleString()}원
             </span>
           </PriceList>
           <hr />
           <div className="saving">
             <span className="save1">적립/혜택</span>
             <span className="save2">
-              {saleCal(book.biPrice, book.biBenefit)?.toLocaleString()}원
+              {saleCal(book.biPrice, book.biBenefit)?.toLocaleString()}P
             </span>
           </div>
           <hr />
-          <div className="delivery">
-            <span className="delivery1">배송안내</span>
-            <span className="delivery2">
-              내일 {Month}월/{date}일, 도착예정
-            </span>
+          <div className="deliveryset">
+            <div className="delivery">
+              <span className="delivery1">무료배송</span>
+              <span className="delivery2">
+                <span>
+                  내일 {Month}월/{date}일, 도착보장
+                </span>
+              </span>
+              <span className="remaintime">
+                ({hour < 10 ? '0' + hour : hour}:
+                {minute < 10 ? '0' + minute : minute}:
+                {second < 10 ? '0' + second : second}내 주문시 / 수도권 기준)
+              </span>
+            </div>
+            <div className="clock" ref={clock}></div>
           </div>
           <hr />
           <div
@@ -134,10 +193,10 @@ const BookMain = (props) => {
             <button type="button" className="btn btn-danger">
               바로구매
             </button>
-            <button type="button" className="btn btn-outline-danger">
+            <button type="button" className="btn btn-outline-secondary">
               선물하기
             </button>
-            <button type="button" className="btn btn-outline-danger">
+            <button type="button" className="btn btn-outline-secondary">
               보관함 +
             </button>
           </div>
@@ -150,15 +209,15 @@ const BookMain = (props) => {
                 받아 보실 수 있습니다.
               </span>
               <button className="alarmbtn">
-                <img src="/photos/alarm.png" alt="" />
+                <div className="bell" ref={bell}></div>
                 <span className="text">알림신청</span>
               </button>
             </div>
             <div className="infotext">
-              <span className="infohead">
-                <img src="/photos/chat.png" alt="" /> 알립니다
+              <div className="bookmark" ref={bookmark}></div>
+              <span className="bialarm">
+                {book.biAlarm ? book.biAlarm : 'DB가 없읍니다'}
               </span>
-              <span className="bialarm">{book.biAlarm}</span>
             </div>
             <button className="marketplace">
               <img src="/photos/marketplace.png" alt="" />
@@ -170,13 +229,13 @@ const BookMain = (props) => {
           <div className="bookpresent">
             <h2>책 소개</h2>
             <span className="bookpresent1">이 책이 속한 분야</span>
-            <span className="bookpresent2">
-              국내도서 > 청소년 > 청소년 소설
-            </span>
-            <span className="bookpresent3">국내도서 > 소설 > 영미 소설</span>
+            <span className="bookpresent2">국내도서 청소년 청소년 소설</span>
+            <span className="bookpresent3">국내도서 소설 영미 소설</span>
           </div>
           <hr />
-          <span className="bookintro">{book.biContent}</span>
+          <span className="bookintro">
+            {book.biContent ? book.biContent : 'DB가 없읍니다'}
+          </span>
         </BookInfo>
       </Wrapper>
       <Wrapper2>
@@ -302,23 +361,18 @@ const Left = styled.div`
     font-weight: 600;
     white-space: nowrap;
   }
-  > .bookSubtitle {
-    width: 100%;
-    height: 30px;
-    font-size: 1rem;
-    font-weight: 500;
-  }
   > .subandauthor {
     display: flex;
     justify-content: center;
     span {
       font-size: 20px;
+      white-space: nowrap;
     }
   }
   > .bookImage {
     > .bookPicture {
-      width: 500px;
-      height: 600px;
+      width: 700px;
+      height: 900px;
       object-fit: contain;
     }
   }
@@ -326,13 +380,11 @@ const Left = styled.div`
 
 const Info = styled.span`
   display: flex;
-  padding-left: 90px;
+  justify-content: space-evenly;
+  align-items: center;
   > span {
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: 500;
-  }
-  > .release {
-    margin-left: 1rem;
   }
 `;
 
@@ -342,14 +394,13 @@ const Right = styled.div`
   width: 100%;
   height: 100%;
   gap: 2rem;
-  > .btn-group {
+  > .mainbuttons {
     display: flex;
     width: 100%;
-    flex-wrap: wrap;
-    gap: 2rem 0;
+    flex-wrap: nowrap;
     button {
       font-size: 1rem;
-      font-weight: 550;
+      font-weight: 550; 
       white-space: nowrap;
     }
   }
@@ -363,14 +414,37 @@ const Right = styled.div`
       color: green;
     }
   }
-  .delivery {
+
+  .deliveryset {
     display: flex;
     justify-content: space-between;
-    span {
-      font-weight: 550;
-      font-size: 1.5rem;
+    .delivery {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      .delivery1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      .delivery2 {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: green;
+        display: flex;
+      }
+      .remaintime {
+        color: black;
+        font-size: 1.5rem;
+      }
+    }
+    .clock {
+      svg {
+        width: 120px !important;
+        height: 120px !important;
+      }
     }
   }
+
   .btn-group2 {
     display: flex;
     gap: 0 1rem;
@@ -384,22 +458,26 @@ const Right = styled.div`
 
 const PriceList = styled.div`
   display: flex;
-  gap: 0 1rem;
-
-  .sale {
-    color: green;
-    font-weight: 600;
-    font-size: 2rem;
-  }
-  .price {
-    font-size: 2rem;
-    font-weight: 600;
-  }
-  .saledprice {
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: left;
+  letter-spacing: 2px;
+  .salerate {
     font-size: 1.5rem;
-    text-align: end;
-    text-decoration: line-through;
-    padding-top: 0.5rem;
+    > span {
+      font-size: 1.5rem;
+      text-decoration: line-through;
+      color: gray;
+    }
+  }
+  .saleprice {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .saleprice2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #df1212
   }
 `;
 
@@ -559,11 +637,21 @@ const Noticelist = styled.div`
   }
   .alarmbtn {
     border: 3px solid #474c98;
-    width: 120px;
     border-radius: 10px;
     color: #474c98;
-    font-size: 20px;
     background: none;
+    display: flex;
+    padding: 5px;
+    > .bell {
+      svg {
+        width: 40px !important;
+        height: 40px !important;
+      }
+    }
+    > .text {
+      font-size: 1rem;
+      padding-top: 8px;
+    }
   }
   .infotext {
     width: 100%;
@@ -571,18 +659,23 @@ const Noticelist = styled.div`
     background-color: rgb(252, 248, 248);
     border-radius: 20px;
     display: flex;
-    flex-direction: column;
-    text-align: left;
-    padding: 2rem;
-    gap: 10px;
-    .infohead {
-      color: #474c98 !important;
-      font-size: 1.2rem;
-      font-weight: 600;
+    padding: 1.5rem;
+    .bookmark {
+      svg {
+        width: 80px !important;
+        height: 80px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+      }
     }
     .bialarm {
-      color: #474c98 !important;
+      color: #474c98;
       font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
   .marketplace {
