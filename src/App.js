@@ -12,6 +12,7 @@ import LogIn from "./pages/LogIn";
 import Member from "./pages/Member";
 import NotFound from "./pages/NotFound";
 import "./App.css";
+import About from "./pages/About";
 
 const App = () => {
   const [bookList, setBookList] = useState([]);
@@ -39,6 +40,7 @@ const App = () => {
         />
         <Route path="/login" element={<LogIn />} />
         <Route path="/member" element={<Member />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

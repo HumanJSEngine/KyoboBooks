@@ -39,6 +39,7 @@
 .bg-wh {
   background: white !important;
 }
+
 .pagination {
   display: flex;
   justify-content: right;
