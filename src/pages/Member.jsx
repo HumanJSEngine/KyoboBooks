@@ -28,7 +28,7 @@ const Member = () => {
           <div className="card col border-dark mb-3">
             <div className="card-header">박시은</div>
             <div className="card-body ">
-              <h5 className="card-title">Header 및 Payment 담당</h5>
+              <h5 className="card-title">Header, Payment 및 LogIn 담당</h5>
               <p className="card-text text-success">Front-end 6조</p>
               <a href="https://github.com/Yenhj/KyoboBooks">
                 <img

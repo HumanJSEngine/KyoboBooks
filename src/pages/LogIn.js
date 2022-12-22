@@ -112,11 +112,31 @@ const LogIn = () => {
               </li>
             </ul>
             <InfoTxt>
-              개인정보 보호를 위해 공용 PC에서 사용 시 SNS계정의 <br />{" "}
-              로그아웃 상태를 꼭 확인해 주세요.
+              개인정보 보호를 위해 공용 PC에서 사용 시 SNS계정의 <br /> 로그아웃
+              상태를 꼭 확인해 주세요.
             </InfoTxt>
           </SnsLoginBox>
+          <JoinBt>
+            <span className="join-txt">회원가입</span>
+          </JoinBt>
         </LogInWrap>
+        <Guest>
+          <span class="guest-txt">비회원 주문조회</span>
+          <span class="ico-arw">
+            <img
+              src="/photos/btn_more_view.png"
+              alt="화살표"
+              style={{ width: 5, height: 9, marginLeft: 4, cursor: "pointer" }}
+            />
+          </span>
+        </Guest>
+        <Banner>
+          <img
+            src="/photos/temp_login_banner.png"
+            alt="배너"
+            style={{ width: 340, height: 60 }}
+          />
+        </Banner>
       </ContentsWrap>
     </Wrapper>
   );
@@ -126,7 +146,7 @@ const Wrapper = styled.div`
   flex: 1 0 auto;
   width: 100%;
   padding: 50px 0 100px;
-  min-height: calc(100vh - 54px - 68px - 250px);
+  margin: 15px 0 80px;
 `;
 const ContentsWrap = styled.div`
   width: 340px;
@@ -244,6 +264,38 @@ const InfoTxt = styled.div`
   margin-top: 18px;
   color: #767676;
   font-size: 14px;
+`;
+const JoinBt = styled.div`
+  margin-top: 20px;
+  margin-bottom: -10px;
+  cursor: pointer;
+  border: 1px solid #5055b1;
+  background: #fff;
+  border-radius: 6px;
+  > .join-txt {
+    color: #474c98;
+    line-height: 50px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+`;
+const Guest = styled.div`
+  margin-top: 20px;
+  > .guest-txt {
+    color: #595959;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+`;
+const Banner = styled.div`
+  margin-top: 20px;
+  cursor: pointer;
+  > .guest-txt {
+    color: #595959;
+    font-size: 13px;
+    font-weight: 500;
+  }
 `;
 
 export default LogIn;
