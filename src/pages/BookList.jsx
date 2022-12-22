@@ -81,17 +81,17 @@ const BookList = (props) => {
                         style={{ height: 370 }}
                       />
                     </div>
-                    <div className="card-body bg-wh ">
-                      <div className="card-title fs-5 mt-2 ms-2 ">
+                    <div className="card-body bg-wh">
+                      <div className="card-title fs-5 mt-2 ms-2">
                         <b className="bg-wh">{item.biTitle}</b>
                       </div>
-                      <p className="fs-6 bg-wh ms-2 ">
+                      <p className="fs-6 bg-wh ms-2">
                         {item.biAuthor}
                         <br />
                         {item.biPublisher}
                       </p>
                       <p className="fs-6 bg-wh">
-                        <span className="badge text-bg-success m-2 ">10%</span>
+                        <span className="badge text-bg-success m-2">10%</span>
                         {cal(item.biPrice)?.toLocaleString()}원{" "}
                         <span className="text-secondary fs-6">
                           (
