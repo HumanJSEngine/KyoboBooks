@@ -19,6 +19,23 @@
 .txt-left {
   text-align: left;
 }
+.form {
+  width: 200px;
+  padding: 3px;
+  font-size: 14px;
+  border: 1px solid #969595;
+  border-right: none;
+  border-radius: 6px 0px 0px 6px;
+}
+.formbt {
+  width: 50px;
+  padding: 3px 3px 4px 3px;
+  font-size: 12px;
+  color: #fff;
+  background-color: rgb(4, 77, 4);
+  border-color: #6b6a6a;
+  border-radius: 0px 6px 6px 0px;
+}
 .bg-wh {
   background: white !important;
 }
