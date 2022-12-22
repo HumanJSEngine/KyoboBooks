@@ -159,7 +159,7 @@ const BookMain = (props) => {
           <div className="saving">
             <span className="save1">적립/혜택</span>
             <span className="save2">
-              {saleCal(book.biPrice, book.biBenefit)?.toLocaleString()}원
+              {saleCal(book.biPrice, book.biBenefit)?.toLocaleString()}P
             </span>
           </div>
           <hr />
