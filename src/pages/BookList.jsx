@@ -10,8 +10,7 @@ const BookList = (props) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [items, setItems] = useState(8);
-  const [search, setSearch] = useState('');
-  
+  const [search, setSearch] = useState("");
 
   const cal = (a) => {
     return a * 0.9;
@@ -43,15 +42,15 @@ const BookList = (props) => {
 
   const onSearch = (e) => {
     e.preventDefault();
-    if (search === null || search === ''){
-      alert('검색어를 입력하세요');
-    }else{
-      const filterData = data.filter((row) => row.biTitle.includes(search))
+    if (search === null || search === "") {
+      alert("검색어를 입력하세요");
+    } else {
+      const filterData = data.filter((row) => row.biTitle.includes(search));
       setData(filterData);
       setPage(1);
-    };
-    setSearch('')
-  }
+    }
+    setSearch("");
+  };
 
   const onChangeSearch = (e) => {
     e.preventDefault();
@@ -60,13 +59,24 @@ const BookList = (props) => {
 
   return (
     <div>
-      <h1 className="mt-4 border border-success border-start-0 border-end-0 p-3">
-        BookList
-      </h1>
-      <form onSubmit={e => onSearch(e)}>
-        <input type="text" value={search} placeholder='제목을 입력하세요' onChange={onChangeSearch}/>
-        <button type='submit'>검색</button>
-      </form>
+      <div className="mt-4 border border-success border-start-0 border-end-0 p-3 position-relative">
+        <h1>BookList</h1>
+        <Form>
+          <form onSubmit={(e) => onSearch(e)}>
+            <input
+              type="text"
+              value={search}
+              placeholder="제목을 입력하세요"
+              onChange={onChangeSearch}
+              className="form"
+            />
+            <button type="submit" className="formbt">
+              Search
+            </button>
+          </form>
+        </Form>
+      </div>
+
       <Mg className="mb-2 mt-5">
         {getClick}
         <select name="items" onChange={itemChange}>
@@ -104,17 +114,17 @@ const BookList = (props) => {
                         style={{ height: 370 }}
                       />
                     </div>
-                    <div className="card-body bg-wh ">
-                      <div className="card-title fs-5 mt-2 ms-2 ">
+                    <div className="card-body bg-wh">
+                      <div className="card-title fs-5 mt-2 ms-2">
                         <b className="bg-wh">{item.biTitle}</b>
                       </div>
-                      <p className="fs-6 bg-wh ms-2 ">
+                      <p className="fs-6 bg-wh ms-2">
                         {item.biAuthor}
                         <br />
                         {item.biPublisher}
                       </p>
                       <p className="fs-6 bg-wh">
-                        <span className="badge text-bg-success m-2 ">10%</span>
+                        <span className="badge text-bg-success m-2">10%</span>
                         {cal(item.biPrice)?.toLocaleString()}원{" "}
                         <span className="text-secondary fs-6">
                           (
@@ -132,6 +142,13 @@ const BookList = (props) => {
             );
           })}
       </div>
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={items}
+        totalItemsCount={data.length - 1}
+        pageRangeDisplayed={8}
+        onChange={handlePageChange}
+      ></Pagination>
     </div>
   );
 };
@@ -140,6 +157,14 @@ const Mg = styled.div`
   display: flex;
   justify-content: right;
   margin-bottom: 60px;
+`;
+
+const Form = styled.form`
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 40px;
 `;
 
 export default BookList;

@@ -14,6 +14,7 @@ const Header = () => {
           alt="logo"
           style={logoSize}
         />
+        
       </div>
       <Right>
         <img
