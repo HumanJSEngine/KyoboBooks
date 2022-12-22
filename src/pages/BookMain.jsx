@@ -102,13 +102,14 @@ const BookMain = (props) => {
             />
           </article>
           <Info>
-            <span className="publish">{book.biPublisher}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span className="publish">{book.biPublisher}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <span className="release">{book.biPublicDt}</span>
           </Info>
         </Left>
         <Right>
           <div
-            className="btn-group"
+            className="btn-group mainbuttons"
             role="group"
             aria-label="Basic outlined example"
           >
@@ -379,14 +380,13 @@ const Right = styled.div`
   width: 100%;
   height: 100%;
   gap: 2rem;
-  > .btn-group {
+  > .mainbuttons {
     display: flex;
     width: 100%;
-    flex-wrap: wrap;
-    gap: 2rem 0;
+    flex-wrap: nowrap;
     button {
       font-size: 1rem;
-      font-weight: 550;
+      font-weight: 550; 
       white-space: nowrap;
     }
   }
