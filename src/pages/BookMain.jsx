@@ -91,7 +91,7 @@ const BookMain = (props) => {
         <Left>
           <span className="bookTitle">{book.biTitle}</span>
           <span className="subandauthor">
-            <span className="bookSubtitle">{book.biSubTitle}</span>
+            <span className="bookSubtitle">{book.biSubTitle}</span>&nbsp;&nbsp;
             <span className="author">{book.biAuthor}</span>
           </span>
           <article className="bookImage">
@@ -102,7 +102,7 @@ const BookMain = (props) => {
             />
           </article>
           <Info>
-            <span className="publish">{book.biPublisher}</span>
+            <span className="publish">{book.biPublisher}</span>&nbsp;&nbsp;&nbsp;&nbsp;
             <span className="release">{book.biPublicDt}</span>
           </Info>
         </Left>
@@ -145,13 +145,14 @@ const BookMain = (props) => {
           </div>
           <PriceList>
             <span class="salerate">
-              {book.biDiscount * 100}% <span>{book.biPrice}원</span>
+              {book.biDiscount * 100}%{' '}
+              <span>{book.biPrice?.toLocaleString()}원</span>
             </span>
             <span className="saleprice">
-              {cal(book.biPrice)?.toLocaleString()}원
+              정가 {cal(book.biPrice)?.toLocaleString()}원
             </span>
             <span className="saleprice2">
-              {(book.biPrice * 0.1)?.toLocaleString()}원
+              할인특가 {(book.biPrice * 0.1)?.toLocaleString()}원
             </span>
           </PriceList>
           <hr />
@@ -345,17 +346,12 @@ const Left = styled.div`
     font-weight: 600;
     white-space: nowrap;
   }
-  > .bookSubtitle {
-    width: 100%;
-    height: 30px;
-    font-size: 1rem;
-    font-weight: 500;
-  }
   > .subandauthor {
     display: flex;
     justify-content: center;
     span {
       font-size: 20px;
+      white-space: nowrap;
     }
   }
   > .bookImage {
@@ -369,13 +365,11 @@ const Left = styled.div`
 
 const Info = styled.span`
   display: flex;
-  padding-left: 90px;
+  justify-content: center;
+  align-items: center;
   > span {
-    font-size: 20px;
-    font-weight: 500;
-  }
-  > .release {
-    margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: 600;
   }
 `;
 
@@ -432,7 +426,7 @@ const Right = styled.div`
     .clock {
       svg {
         width: 120px !important;
-        height:120px !important;
+        height: 120px !important;
       }
     }
   }
