@@ -103,7 +103,6 @@ const BookMain = (props) => {
           </article>
           <Info>
             <span className="publish">{book.biPublisher}</span>
-            &nbsp;&nbsp;&nbsp;&nbsp;
             <span className="release">{book.biPublicDt}</span>
           </Info>
         </Left>
@@ -366,11 +365,11 @@ const Left = styled.div`
 
 const Info = styled.span`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   > span {
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 500;
   }
 `;
 
@@ -449,21 +448,21 @@ const PriceList = styled.div`
   text-align: left;
   letter-spacing: 2px;
   .salerate {
-    font-size: 2rem;
+    font-size: 1.5rem;
     > span {
-      font-size: 2rem;
+      font-size: 1.5rem;
       text-decoration: line-through;
       color: gray;
     }
   }
   .saleprice {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
   }
   .saleprice2 {
     font-size: 2rem;
     font-weight: 600;
-    color: red;
+    color: #df1212
   }
 `;
 
