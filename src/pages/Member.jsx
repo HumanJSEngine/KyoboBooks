@@ -14,7 +14,7 @@ const Member = () => {
             <div className="card-body ">
               <h5 className="card-title">BookMain 담당 </h5>
               <p className="card-text text-success">Front-end 6조</p>
-              <a href="https://github.com/HumanJSEngine/KyoboBooks">
+              <a href="https://github.com/HumanJSEngine">
                 <img
                   src="/photos/github.png"
                   alt="github"
