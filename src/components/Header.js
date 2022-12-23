@@ -23,7 +23,7 @@ const Header = () => {
           alt="cart"
           style={imgSize}
         />
-        <Link to="/Member">
+        <Link to="/LogIn">
           <img
             src="/photos/btn_header_my.png"
             className="img-my"
@@ -37,7 +37,7 @@ const Header = () => {
           className={({ isActive }) => {
             return isActive ? "btn menu btn-dark" : "btn menu btn-success";
           }}
-          to="/"
+          to="/booklist"
         >
           To BookList
         </NavLink>

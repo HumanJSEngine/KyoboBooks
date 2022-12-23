@@ -176,7 +176,7 @@ const BookMain = (props) => {
               <span className="remaintime">
                 ({hour < 10 ? '0' + hour : hour}:
                 {minute < 10 ? '0' + minute : minute}:
-                {second < 10 ? '0' + second : second}내 주문시 / 수도권 기준)
+                {second < 10 ? '0' + second : second} 내 주문시 / 수도권 기준)
               </span>
             </div>
             <div className="clock" ref={clock}></div>
