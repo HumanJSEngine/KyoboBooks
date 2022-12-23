@@ -83,7 +83,7 @@ const BookMain = (props) => {
     return a * b;
   };
 
-  const date = new Date().getDate() + 1;
+  const date = new Date().getDate();
   const Month = new Date().getMonth() + 1;
   const Year = new Date().getFullYear();
 
