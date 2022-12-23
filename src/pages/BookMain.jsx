@@ -216,7 +216,7 @@ const BookMain = (props) => {
             <div className="infotext">
               <div className="bookmark" ref={bookmark}></div>
               <span className="bialarm">
-                {book.biAlarm ? book.biAlarm : 'DB가 없읍니다'}
+                {book.biAlarm ? book.biAlarm : 'DB가 없습니다'}
               </span>
             </div>
             <button className="marketplace">

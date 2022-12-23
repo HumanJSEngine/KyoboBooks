@@ -36,7 +36,7 @@ const About = () => {
       </h1>
       <h2>미니 프로젝트 "교보문고"</h2>
       <h4> 프론트엔드 : 기획, 디자인, 데이터 불러오기</h4>
-      <h4> 백엔드 : "한 작업"</h4>
+      <h4> 백엔드 : 데이터  구조화 및 서버 구축</h4>
       <Container>
         <div className="girl" ref={about}></div>
       </Container>
