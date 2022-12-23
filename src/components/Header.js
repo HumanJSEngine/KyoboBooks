@@ -7,15 +7,16 @@ const imgSize = { width: 40, height: 40, border: 0, margin: 15 };
 const Header = () => {
   return (
     <div className="flex text-center mt-5">
-      <div className="navbar-brand">
-        <img
-          src="/photos/img_logo_kyobo.png"
-          className="img-logo"
-          alt="logo"
-          style={logoSize}
-        />
-        
-      </div>
+      <NavLink to="/" style={{ textDecoration: "none" }}>
+        <div className="navbar-brand">
+          <img
+            src="/photos/img_logo_kyobo.png"
+            className="img-logo"
+            alt="logo"
+            style={logoSize}
+          />
+        </div>
+      </NavLink>
       <Right>
         <img
           src="/photos/btn_header_cart.png"
