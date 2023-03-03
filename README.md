@@ -5,7 +5,6 @@
 교보문고 DB를 이용하여 미니 온라인서점을 구현하였습니다.
 
 # 기술스택
-<hr/>
 
 #### Frontend
 [![My Skills](https://skillicons.dev/icons?i=html,css,js,react,ts,redux,styledcomponents,vite,git,vscode)](https://skillicons.dev)
@@ -14,7 +13,6 @@
 [![My Skills](https://skillicons.dev/icons?i=java,mysql)](https://skillicons.dev)
 
 # 시연영상
-<hr/>
 <img src="https://user-images.githubusercontent.com/103413040/222675624-1f5126bf-04ed-423b-944d-294327ffab73.gif" width="300" height="600"/>
 
 
