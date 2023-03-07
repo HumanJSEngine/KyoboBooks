@@ -3,6 +3,7 @@
 
 # 프로젝트 기능
 교보문고 DB를 이용하여 미니 온라인서점을 구현하였습니다.
+json-server --watch data/db.json --port 8000로 임시 api 구현
 
 # 기술스택
 
