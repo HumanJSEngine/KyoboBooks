@@ -57,10 +57,12 @@ json-server --watch data/db.json --port 8000로 임시 api 구현
 - 북스토어에 알맞는 깔끔한 UI (BootStrap 사용)
 - 책 간편 정보 불러오기 (API 연동)
 - 개수 선택에 따른 페이지네이션
+- 책 제목 검색
 
 #### BookMain
 
--
+- 책목록별로 상세 내역 표시
+- 타이머 및 애니메이션(UX) 추가 
 
 <br/>
 
