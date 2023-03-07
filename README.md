@@ -14,7 +14,7 @@ json-server --watch data/db.json --port 8000로 임시 api 구현
 [![My Skills](https://skillicons.dev/icons?i=java,mysql)](https://skillicons.dev)
 
 # 시연영상
-<img src="https://user-images.githubusercontent.com/103413040/222675624-1f5126bf-04ed-423b-944d-294327ffab73.gif" width="300" height="600"/>
+<img src="https://user-images.githubusercontent.com/103413040/223362125-f9ffb27c-29b4-45b3-b91c-d050722efeec.mp4" width="300" height="600"/>
 
 
 # Team
